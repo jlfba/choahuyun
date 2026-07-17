@@ -105,7 +105,7 @@ def main():
     log("=" * 50)
 
     # 1. 抓取
-    log("[1/2] 抓取数据...")
+    log("[1/4] 抓取数据...")
     result = subprocess.run(
         [sys.executable, str(WORK_DIR / "auto_scrape.py"), yesterday],
         cwd=str(WORK_DIR), capture_output=True, text=True, timeout=1800,
@@ -116,7 +116,7 @@ def main():
     log("[OK] 抓取完成")
 
     # 2. 转写
-    log("[2/2] 语音转写...")
+    log("[2/4] 语音转写...")
     result = subprocess.run(
         [sys.executable, str(WORK_DIR / "transcribe_sensevoice.py"), yesterday],
         cwd=str(WORK_DIR), capture_output=True, text=True, timeout=3600,
@@ -127,8 +127,23 @@ def main():
     log("[OK] 转写完成")
 
     # 3. 清洗数据
-    log("[3/3] 清洗数据...")
+    log("[3/4] 清洗数据...")
     clean_data(yesterday)
+
+    # 4. 清理重复音频
+    log("[4/4] 清理重复音频...")
+    try:
+        result = subprocess.run(
+            [sys.executable, str(WORK_DIR / "clean_audio.py"), yesterday],
+            cwd=str(WORK_DIR), capture_output=True, text=True, timeout=600,
+        )
+        if result.returncode == 0:
+            log("[OK] 音频清理完成")
+            log(result.stdout[-300:] if len(result.stdout) > 300 else result.stdout)
+        else:
+            log(f"[WARN] 音频清理异常: {result.stderr[-200:]}")
+    except Exception as e:
+        log(f"[WARN] 音频清理异常: {e}")
 
     # 4. 完成
     log("=" * 50)
