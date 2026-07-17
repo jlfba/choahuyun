@@ -1,8 +1,7 @@
 services:
-  # 网页展示服务（轻量，~300MB）
-  web:
+  chaohuyun:
     image: ghcr.io/jlfba/choahuyun:latest
-    container_name: chaohuyun-web
+    container_name: chaohuyun
     restart: unless-stopped
     ports:
       - "8066:8066"
@@ -11,19 +10,3 @@ services:
       - ./output:/app/output
     environment:
       - TZ=Asia/Shanghai
-    command: web
-
-  # 定时抓取调度器（重型，含 PyTorch，~5GB）
-  # 按需启动：docker compose --profile scraper up -d scheduler
-  scheduler:
-    image: ghcr.io/jlfba/choahuyun:scraper
-    container_name: chaohuyun-scheduler
-    restart: unless-stopped
-    volumes:
-      - ./config.json:/app/config.json:ro
-      - ./output:/app/output
-    environment:
-      - TZ=Asia/Shanghai
-    command: ["python", "scheduler.py"]
-    profiles:
-      - scraper
