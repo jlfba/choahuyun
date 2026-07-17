@@ -14,7 +14,7 @@ services:
     command: web
 
   # 定时抓取调度器（重型，含 PyTorch，~5GB）
-  # 按需启动：docker compose up -d scheduler
+  # 按需启动：docker compose --profile scraper up -d scheduler
   scheduler:
     image: ghcr.io/jlfba/choahuyun:scraper
     container_name: chaohuyun-scheduler
@@ -24,6 +24,6 @@ services:
       - ./output:/app/output
     environment:
       - TZ=Asia/Shanghai
-    command: scheduler
+    command: ["python", "scheduler.py"]
     profiles:
       - scraper

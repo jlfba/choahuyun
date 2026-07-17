@@ -17,7 +17,7 @@ def log(msg):
     print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] {msg}")
 
 def job():
-    """抓取前一天数据 + 转写"""
+    """抓取前一天数据 + 转写 + 清洗"""
     yesterday = (datetime.now() - timedelta(days=1)).strftime('%Y-%m-%d')
     excel_path = WORK_DIR / "output" / f"通话记录_{yesterday}.xlsx"
 
@@ -27,38 +27,21 @@ def job():
         return
 
     log("=" * 40)
-    log(f"[START] 开始抓取 {yesterday} 的数据...")
+    log(f"[START] 开始处理 {yesterday} 的数据...")
 
-    # 抓取
     try:
         result = subprocess.run(
-            [sys.executable, str(WORK_DIR / "auto_scrape.py"), yesterday],
+            [sys.executable, str(WORK_DIR / "daily_task.py")],
             cwd=str(WORK_DIR),
-            capture_output=True, text=True, timeout=1800,
+            capture_output=True, text=True, timeout=7200,
         )
         if result.returncode == 0:
-            log(f"[OK] {yesterday} 抓取完成")
+            log(f"[OK] {yesterday} 处理完成")
+            log(result.stdout[-500:] if len(result.stdout) > 500 else result.stdout)
         else:
-            log(f"[ERR] 抓取失败: {result.stderr[-300:]}")
-            return
+            log(f"[ERR] 处理失败: {result.stderr[-300:]}")
     except Exception as e:
-        log(f"[ERR] 抓取异常: {e}")
-        return
-
-    # 转写
-    log(f"[START] 开始转写 {yesterday}...")
-    try:
-        result = subprocess.run(
-            [sys.executable, str(WORK_DIR / "transcribe_sensevoice.py"), yesterday],
-            cwd=str(WORK_DIR),
-            capture_output=True, text=True, timeout=3600,
-        )
-        if result.returncode == 0:
-            log(f"[OK] {yesterday} 转写完成")
-        else:
-            log(f"[ERR] 转写失败: {result.stderr[-300:]}")
-    except Exception as e:
-        log(f"[ERR] 转写异常: {e}")
+        log(f"[ERR] 异常: {e}")
 
     log("=" * 40)
 
