@@ -1,0 +1,107 @@
+<!DOCTYPE html><html lang="zh" style=""><head><title>系统管理后台 · 超呼云</title><meta charset="utf-8"><meta name="renderer" content="webkit"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=0.4"><link rel="shortcut icon" href="https://chy-call.oss-cn-hangzhou.aliyuncs.com/images/84/35e9a23bd04ad43b1efdf508fbdae2.png"><link rel="stylesheet" href="/static/plugs/awesome/fonts.css?at=0715"><link rel="stylesheet" href="/static/plugs/layui/css/layui.css?at=0715"><link rel="stylesheet" href="/static/theme/css/console.css?at=0715"><script>window.tapiRoot = '/admin'</script><script src="/static/plugs/jquery/pace.min.js"></script><link id="layuicss-laydate" rel="stylesheet" href="https://chaohuzhineng.com/static/plugs/layui/css/modules/laydate/default/laydate.css?v=5.0.9" media="all"><link id="layuicss-layer" rel="stylesheet" href="https://chaohuzhineng.com/static/plugs/layui/css/modules/layer/default/layer.css?v=3.1.1" media="all"><link id="layuicss-skincodecss" rel="stylesheet" href="https://chaohuzhineng.com/static/plugs/layui/css/modules/code.css" media="all"><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="echarts" src="https://chaohuzhineng.com/static/plugs/echarts/echarts.min.js"></script></head><body class="layui-layout-body   pace-done pace-done"><div class="pace  pace-inactive pace-inactive"><div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
+  <div class="pace-progress-inner"></div>
+</div>
+<div class="pace-activity"></div></div><div class="layui-layout layui-layout-admin"><!-- 顶部菜单 开始 --><div class="layui-header notselect"><a href="/" class="layui-logo layui-elip">超呼云<sup>v1.0</sup></a><ul class="layui-nav layui-layout-left"><li class="layui-nav-item" lay-unselect=""><a class="text-center" data-target-menu-type=""><i class="layui-icon layui-icon-spread-left"></i></a></li><li class="layui-nav-item layui-this"><a data-menu-node="m-67" data-open="#"><span>控制台</span></a></li><span class="layui-nav-bar"></span></ul><ul class="layui-nav layui-layout-right"><li lay-unselect="" class="layui-nav-item"><a data-reload="" id="dataReload"><i class="layui-icon layui-icon-refresh-3"></i></a></li><li class="layui-nav-item"><dl class="layui-nav-child"><!--                    <dd lay-unselect><a data-modal="/admin/index/info.html?id=31810"><i class="layui-icon layui-icon-set-fill"></i> 基本资料</a></dd>--><dd lay-unselect=""><a data-modal="/admin/index/pass.html?id=31810"><i class="layui-icon layui-icon-component"></i> 安全设置</a></dd><dd lay-unselect=""><a data-load="/admin/login/out.html" data-confirm="确定要退出登录吗？"><i class="layui-icon layui-icon-release"></i> 退出登录</a></dd></dl><a class="layui-elip"><img alt=" " onerror="this.src='/static/theme/img/headimg.png'" src="/static/theme/img/headimg.png"><span>浙江锦联国际物流有限公司</span><span class="layui-nav-more"></span></a></li><span class="layui-nav-bar"></span></ul></div><!-- 顶部菜单 结束 --><!-- 左则菜单 开始 --><div class="layui-side layui-bg-black notselect"><div class="layui-side-scroll"><ul class="layui-nav layui-nav-tree" data-menu-layout="m-67"><li class="layui-nav-item layui-nav-itemed" data-submenu-layout="m-67-90"><a data-target-tips="业务管理" style="background:#393D49"><span class="nav-icon layui-hide layui-icon layui-icon-triangle-d"></span><span class="nav-text">业务管理</span><span class="layui-nav-more"></span></a><dl class="layui-nav-child"><dd class="layui-this"><a data-target-tips="首页" data-open="/data/dashboard/index.html" data-menu-node="m-67-90-144"><span class="nav-icon layui-icon layui-icon-link"></span><span class="nav-text">首页</span></a></dd><dd><a data-target-tips="数据库" data-open="/user/three_apply/index.html" data-menu-node="m-67-90-143"><span class="nav-icon layui-icon layui-icon-link"></span><span class="nav-text">数据库</span></a></dd><dd><a data-target-tips="坐席列表" data-open="/user/index/index.html" data-menu-node="m-67-90-92"><span class="nav-icon layui-icon layui-icon-set"></span><span class="nav-text">坐席列表</span></a></dd><dd><a data-target-tips="通话列表" data-open="/user/phone/index.html" data-menu-node="m-67-90-93"><span class="nav-icon layui-icon layui-icon-component"></span><span class="nav-text">通话列表</span></a></dd><dd><a data-target-tips="充值记录" data-open="/user/recharge/index.html" data-menu-node="m-67-90-96"><span class="nav-icon layui-icon layui-icon-diamond"></span><span class="nav-text">充值记录</span></a></dd><dd><a data-target-tips="导入Excel列表" data-open="/user/excel/index.html" data-menu-node="m-67-90-105"><span class="nav-icon layui-icon layui-icon-tabs"></span><span class="nav-text">导入Excel列表</span></a></dd><dd><a data-target-tips="回收客户" data-open="/user/dial/index.html" data-menu-node="m-67-90-106"><span class="nav-icon layui-icon layui-icon-wifi"></span><span class="nav-text">回收客户</span></a></dd><dd><a data-target-tips="分组管理" data-open="/user/group/index.html" data-menu-node="m-67-90-110"><span class="nav-icon layui-icon layui-icon-username"></span><span class="nav-text">分组管理</span></a></dd><dd><a data-target-tips="公司黑名单" data-open="/user/mblack/index.html" data-menu-node="m-67-90-113"><span class="nav-icon layui-icon layui-icon-heart-fill"></span><span class="nav-text">公司黑名单</span></a></dd><dd><a data-target-tips="点呼号码" data-open="/user/uphone/index.html" data-menu-node="m-67-90-95"><span class="nav-icon layui-icon layui-icon-mike"></span><span class="nav-text">点呼号码</span></a></dd></dl></li><li class="layui-nav-item layui-nav-itemed" data-submenu-layout="m-67-108"><a data-target-tips="图表统计" style="background:#393D49"><span class="nav-icon layui-hide layui-icon layui-icon-triangle-d"></span><span class="nav-text">图表统计</span><span class="layui-nav-more"></span></a><dl class="layui-nav-child"><dd><a data-target-tips="公司统计" data-open="/user/statistics/index.html" data-menu-node="m-67-108-97"><span class="nav-icon layui-icon layui-icon-export"></span><span class="nav-text">公司统计</span></a></dd><dd><a data-target-tips="坐席统计" data-open="/user/statistics/user.html" data-menu-node="m-67-108-98"><span class="nav-icon layui-icon layui-icon-email"></span><span class="nav-text">坐席统计</span></a></dd><dd><a data-target-tips="公司月度统计" data-open="/user/statisticsmonth/index.html" data-menu-node="m-67-108-101"><span class="nav-icon layui-icon layui-icon-ios"></span><span class="nav-text">公司月度统计</span></a></dd><dd><a data-target-tips="坐席月度统计" data-open="/user/st/index.html" data-menu-node="m-67-108-103"><span class="nav-icon layui-icon layui-icon-service"></span><span class="nav-text">坐席月度统计</span></a></dd><dd><a data-target-tips="群组统计列表" data-open="/user/groups/index.html" data-menu-node="m-67-108-112"><span class="nav-icon layui-icon layui-icon-template-1"></span><span class="nav-text">群组统计列表</span></a></dd><dd><a data-target-tips="坐席总计" data-open="/user/statisticstime/user.html" data-menu-node="m-67-108-119"><span class="nav-icon layui-icon layui-icon-heart-fill"></span><span class="nav-text">坐席总计</span></a></dd></dl></li><li class="layui-nav-item layui-nav-itemed" data-submenu-layout="m-67-134"><a data-target-tips="客户管理" style="background:#393D49"><span class="nav-icon layui-hide layui-icon layui-icon-triangle-d"></span><span class="nav-text">客户管理</span><span class="layui-nav-more"></span></a><dl class="layui-nav-child"><dd><a data-target-tips="客户列表" data-open="/user/customer/index.html" data-menu-node="m-67-134-135"><span class="nav-icon layui-icon layui-icon-user"></span><span class="nav-text">客户列表</span></a></dd></dl></li><span class="layui-nav-bar"></span></ul></div></div><div id="openHangupButton" style="position: absolute; z-index: 1000;margin-top: 110px;right: 0px; display: none"><button type="button" onclick="hangup()" class="layui-btn layui-btn-lg layui-btn-danger layui-btn-radius">挂断
+        </button></div><!-- 左则菜单 结束 --><!-- 主体内容 开始 --><div class="layui-body layui-bg-gray"><div class="layui-card layui-bg-gray"><div class="layui-card-body"><link rel="stylesheet" href="/static/theme/css/dashboard.css?v=1"><div class="dashboard-merchant"><div class="dashboard-section-title">概览</div><div class="metric-grid"><!-- 今日通话 --><div class="metric-card" data-open="user/phone/index" style="cursor: pointer;"><div class="metric-title">今日通话时间</div><div class="metric-value"><span>119</span><span class="metric-unit">分钟</span></div></div><!-- 本月通话 --><div class="metric-card" data-open="user/statistics/index" style="cursor: pointer;"><div class="metric-title">本月通话时间</div><div class="metric-value"><span>3530</span><span class="metric-unit">分钟</span></div></div><!-- 坐席数量 --><div class="metric-card" data-open="user/index/index" style="cursor: pointer;"><div class="metric-title">我的坐席</div><div class="metric-value"><span>45</span><span class="metric-unit">人</span></div></div><!-- 客户统计 --><div class="metric-card" data-open="user/customer/index.html" style="cursor: pointer;"><div class="metric-title">客户总数</div><div class="metric-value"><span>1075</span><span class="metric-unit">人</span></div></div><!-- 可用分钟/余额 --><div class="metric-card" data-open="user/recharge/index" style="cursor: pointer;"><div class="metric-title">可用余额</div><div class="metric-value"><span class="metric-unit" style="margin-left: 0; margin-right: 2px;">¥</span><span>0.00</span></div></div></div><div class="dashboard-section-title">通话趋势</div><div class="chart-panel"><div class="chart-head"><div><h3 class="chart-title">最近15天通话时长趋势</h3><p class="chart-sub">每日通话分钟数汇总</p></div></div><div id="dayTimeTrend" _echarts_instance_="ec_1784095790692" style="-webkit-tap-highlight-color: transparent; user-select: none; position: relative;"><div style="position: relative; overflow: hidden; width: 1624px; height: 336px; padding: 0px; margin: 0px; border-width: 0px;"><canvas data-zr-dom-id="zr_0" width="1624" height="336" style="position: absolute; left: 0px; top: 0px; width: 1624px; height: 336px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div></div></div></div></div><label class="layui-hide"><textarea id="dayTotalData" style="">[{"day":"30","dialTime":"284"},{"day":"01","dialTime":"141"},{"day":"02","dialTime":"272"},{"day":"03","dialTime":"458"},{"day":"04","dialTime":"115"},{"day":"06","dialTime":"338"},{"day":"07","dialTime":"417"},{"day":"08","dialTime":"535"},{"day":"09","dialTime":"300"},{"day":"10","dialTime":"177"},{"day":"11","dialTime":"1"},{"day":"13","dialTime":"282"},{"day":"14","dialTime":"375"}]</textarea></label></div><script>
+    require(['echarts'], function (echarts) {
+        var dayTotal = JSON.parse($('#dayTotalData').html() || '[]');
+        var chart = echarts.init(document.getElementById('dayTimeTrend'));
+
+        var xData = dayTotal.map(function (item) {
+            return item.day + '日';
+        });
+        var yData = dayTotal.map(function (item) {
+            return Number(item.dialTime || 0);
+        });
+
+        chart.setOption({
+            tooltip: {
+                trigger: 'axis',
+                backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                textStyle: { color: '#333' },
+                formatter: function (params) {
+                    var point = params[0] || {};
+                    return '<div style="font-weight:600;margin-bottom:4px;">' + point.axisValue + '</div>' +
+                        '<div style="color:#4e73df;">通话时长: ' + (point.value || 0) + ' 分钟</div>';
+                }
+            },
+            grid: { left: '3%', right: '4%', top: '15%', bottom: '5%', containLabel: true },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: xData,
+                axisTick: { show: false },
+                axisLine: { lineStyle: { color: '#eee' } },
+                axisLabel: { color: '#999', fontSize: 11 }
+            },
+            yAxis: {
+                type: 'value',
+                axisLine: { show: false },
+                axisTick: { show: false },
+                splitLine: { lineStyle: { type: 'dashed', color: '#f0f0f0' } },
+                axisLabel: { color: '#999', fontSize: 11 }
+            },
+            series: [{
+                name: '通话时长',
+                type: 'line',
+                smooth: true,
+                data: yData,
+                symbol: 'circle',
+                symbolSize: 6,
+                lineStyle: { width: 3, color: '#4e73df' },
+                itemStyle: { color: '#4e73df', borderColor: '#fff', borderWidth: 2 },
+                areaStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                        { offset: 0, color: 'rgba(78, 115, 223, 0.2)' },
+                        { offset: 1, color: 'rgba(78, 115, 223, 0.01)' }
+                    ])
+                }
+            }]
+        });
+
+        window.addEventListener('resize', function () {
+            chart.resize();
+        });
+    });
+</script></div></div><!-- 主体内容 结束 --><div id="motaikunag" style="display: none;"><div class="layui-row" style="margin: 20px"><div class="layui-col-xs11"><input type="number" name="call-number" id="call-number" placeholder="请输入拨打号码" autocomplete="off" class="layui-input" style=""></div><div class="layui-col-xs1"><i class="layui-icon" onclick="delNumber()" style="font-size: 30px; color: #009688;">ဆ</i></div></div><div class="layui-row" style="text-align: center;margin-top: 20px"><div class="layui-btn-container"><button type="button" onclick="onNumber(1)" class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius">1
+                </button><button type="button" onclick="onNumber(2)" class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius">2
+                </button><button type="button" onclick="onNumber(3)" class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius">3
+                </button></div><div class="layui-btn-container"><button type="button" onclick="onNumber(4)" class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius">4
+                </button><button type="button" onclick="onNumber(5)" class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius">5
+                </button><button type="button" onclick="onNumber(6)" class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius">6
+                </button></div><div class="layui-btn-container"><button type="button" onclick="onNumber(7)" class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius">7
+                </button><button type="button" onclick="onNumber(8)" class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius">8
+                </button><button type="button" onclick="onNumber(9)" class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius">9
+                </button></div><div class="layui-btn-container"><button type="button" onclick="onNumber('*')" class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius">*
+                </button><button type="button" onclick="onNumber(0)" class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius">0
+                </button><button type="button" onclick="onNumber('#')" class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius">#
+                </button></div><div class="layui-btn-container" style="text-align: center"><button type="button" onclick="onCall()" class="layui-btn layui-btn-lg layui-btn-radius">拨号</button><button id="hangup" type="button" onclick="hangup()" class="layui-btn layui-btn-lg layui-btn-danger layui-btn-radius" style="display: none;">挂断
+                </button></div></div><div class="layui-row" id="autoCallDiv" style="text-align: center; margin-top: 20px; display: none;"><form class="layui-form"><div class="layui-form-item"><input type="checkbox" lay-filter="autoCall" id="autoCall" name="autoCall" title="自动拨号" style=""><div class="layui-unselect layui-form-checkbox"><span>自动拨号</span><i class="layui-icon layui-icon-ok"></i></div></div></form></div><div class="layui-row" style="text-align: center;margin-top: 20px; margin-bottom: 20px"><span style="size: 25px" id="callStatus"></span></div></div></div><script src="/static/plugs/layui/layui.all.js"></script><script src="/static/webrtc/jssip-3.7.4.min.js"></script><script src="/static/plugs/require/require.js"></script><script src="/static/admin.js"></script><script src="/static/sip.js?a=3"></script><script>
+    window.thirdCallAllowOrigins = "http:\/\/127.0.0.1:18080,https:\/\/chaohu-open.jingxiansuo.com\/";
+</script><script src="/static/third-call-message.js?at=0715"></script><script>
+    layui.use('form', function () {
+        const form = layui.form;
+        form.render();
+        form.on('checkbox(autoCall)', function (data) {
+            if (data.elem.checked) {
+                userOpenAutoCall();
+                console.log('自动呼叫开关')
+            } else {
+                console.log('自动呼叫开关关闭');
+            }
+        });
+    });
+
+    const isSip = "";
+
+    // 不是sip 隐藏
+    if (!isSip) {
+        $('#autoCallDiv').hide();
+        $('#hangup').hide();
+    }
+
+    /**
+          **/
+</script>
+<div class="layui-layer-move"></div></body></html>

@@ -1,0 +1,22 @@
+{
+  "credentials": {
+    "username": "你的账号",
+    "password": "你的密码"
+  },
+  "settings": {
+    "headless": true,
+    "slow_mo": 500,
+    "timeout": 30000,
+    "max_pages": 9999,
+    "max_concurrent_downloads": 3,
+    "date_filter": "2026-07-15"
+  },
+  "paths": {
+    "audio_dir": "output/audio",
+    "output_excel": "output/通话记录_完整数据.xlsx"
+  },
+  "whisper": {
+    "model": "large-v3",
+    "language": "zh"
+  }
+}
