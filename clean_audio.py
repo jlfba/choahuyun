@@ -134,6 +134,7 @@ def clean_audio(date_str=None, dry_run=False):
                 unparseable.append(f)
 
         # 1. 删除不在 Excel 里的组合
+        pairs_to_remove = []
         for pair, files in audio_by_pair.items():
             if pair not in pair_counts:
                 for f in files:
@@ -148,7 +149,9 @@ def clean_audio(date_str=None, dry_run=False):
                             log(f"  [ERR] {f.name}: {e}")
                             continue
                     total_deleted += 1
-                del audio_by_pair[pair]
+                pairs_to_remove.append(pair)
+        for pair in pairs_to_remove:
+            del audio_by_pair[pair]
 
         # 2. 超出 Excel 行数的重复音频删除
         for pair, files in audio_by_pair.items():
