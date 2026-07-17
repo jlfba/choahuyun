@@ -34,5 +34,39 @@ chaohuyun/
 2. 创建 Vue3 前端 - 表格 + 播放器 + 筛选
 3. 联调测试
 
+## Docker 部署
+
+### 快速启动
+```bash
+# 1. 准备配置文件
+cp config.example.json config.json
+# 编辑 config.json 填入账号密码
+
+# 2. 启动（网页 + 定时抓取）
+docker compose up -d
+
+# 3. 访问
+# 网页: http://服务器IP:8066
+```
+
+### 单独执行任务
+```bash
+# 一次性抓取全部数据
+docker compose run --rm web scrape
+
+# 抓取指定日期
+docker compose run --rm web scrape 2026-07-15
+
+# 执行每日任务（抓取+转写+清洗）
+docker compose run --rm web daily
+```
+
+### 数据目录
+| 容器路径 | 宿主机路径 | 说明 |
+|---|---|---|
+| `/app/config.json` | `./config.json` | 账号密码（只读挂载） |
+| `/app/output/` | `./output/` | Excel + 音频（读写，持久化） |
+
 ## 版本记录
 v1.0.0 - 初始版本
+v1.1.0 - 添加 Docker 部署支持

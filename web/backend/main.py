@@ -9,13 +9,16 @@ from datetime import datetime
 from fastapi import FastAPI, Query
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 import pandas as pd
 
 app = FastAPI(title="通话记录展示")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
-OUTPUT_DIR = Path(__file__).parent.parent.parent / "output"
+BASE_DIR = Path(__file__).parent.parent.parent
+OUTPUT_DIR = BASE_DIR / "output"
 AUDIO_DIR = OUTPUT_DIR / "audio"
+FRONTEND_DIST = Path(__file__).parent.parent / "frontend" / "dist"
 
 @app.get("/api/dates")
 def get_dates():
@@ -116,6 +119,10 @@ def get_audio(date: str, filename: str):
         ".ogg": "audio/ogg",
     }.get(ext, "audio/wav")
     return FileResponse(file_path, media_type=media_type)
+
+# 生产模式：挂载前端静态文件（Docker 中 dist/ 存在时生效）
+if FRONTEND_DIST.exists():
+    app.mount("/", StaticFiles(directory=str(FRONTEND_DIST), html=True), name="static")
 
 if __name__ == "__main__":
     import uvicorn

@@ -67,7 +67,11 @@ async def run():
         log("[WARN] 未安装 opencc，转写结果可能包含繁体字")
 
     async with async_playwright() as pw:
-        browser = await pw.chromium.launch(channel="msedge", headless=True)
+        import platform
+        browser_args = {"headless": True}
+        if platform.system() == "Windows":
+            browser_args["channel"] = "msedge"
+        browser = await pw.chromium.launch(**browser_args)
         ctx = await browser.new_context(viewport={"width": 1920, "height": 1080})
         page = await ctx.new_page()
 

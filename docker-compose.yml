@@ -1,0 +1,28 @@
+services:
+  # 网页展示服务
+  web:
+    build: .
+    container_name: chaohuyun-web
+    restart: unless-stopped
+    ports:
+      - "8066:8066"
+    volumes:
+      - ./config.json:/app/config.json:ro
+      - ./output:/app/output
+    environment:
+      - PYTHONIOENCODING=utf-8
+      - TZ=Asia/Shanghai
+    command: web
+
+  # 定时抓取调度器（每天自动抓取+转写）
+  scheduler:
+    build: .
+    container_name: chaohuyun-scheduler
+    restart: unless-stopped
+    volumes:
+      - ./config.json:/app/config.json:ro
+      - ./output:/app/output
+    environment:
+      - PYTHONIOENCODING=utf-8
+      - TZ=Asia/Shanghai
+    command: scheduler
