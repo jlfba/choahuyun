@@ -1,7 +1,7 @@
 services:
   # 网页展示服务
   web:
-    build: .
+    image: ghcr.io/jlfba/choahuyun:latest
     container_name: chaohuyun-web
     restart: unless-stopped
     ports:
@@ -16,7 +16,7 @@ services:
 
   # 定时抓取调度器（每天自动抓取+转写）
   scheduler:
-    build: .
+    image: ghcr.io/jlfba/choahuyun:latest
     container_name: chaohuyun-scheduler
     restart: unless-stopped
     volumes:
