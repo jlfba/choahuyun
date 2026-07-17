@@ -1,5 +1,5 @@
 services:
-  # 网页展示服务
+  # 网页展示服务（轻量，~300MB）
   web:
     image: ghcr.io/jlfba/choahuyun:latest
     container_name: chaohuyun-web
@@ -10,19 +10,20 @@ services:
       - ./config.json:/app/config.json:ro
       - ./output:/app/output
     environment:
-      - PYTHONIOENCODING=utf-8
       - TZ=Asia/Shanghai
     command: web
 
-  # 定时抓取调度器（每天自动抓取+转写）
+  # 定时抓取调度器（重型，含 PyTorch，~5GB）
+  # 按需启动：docker compose up -d scheduler
   scheduler:
-    image: ghcr.io/jlfba/choahuyun:latest
+    image: ghcr.io/jlfba/choahuyun:scraper
     container_name: chaohuyun-scheduler
     restart: unless-stopped
     volumes:
       - ./config.json:/app/config.json:ro
       - ./output:/app/output
     environment:
-      - PYTHONIOENCODING=utf-8
       - TZ=Asia/Shanghai
     command: scheduler
+    profiles:
+      - scraper

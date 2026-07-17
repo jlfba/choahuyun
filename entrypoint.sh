@@ -20,10 +20,10 @@ case "${1:-web}" in
     ;;
   *)
     echo "用法:"
-    echo "  docker compose run chaohuyun web         # 启动网页（默认）"
-    echo "  docker compose run chaohuyun scheduler    # 启动定时抓取"
-    echo "  docker compose run chaohuyun scrape       # 一次性抓取全部"
-    echo "  docker compose run chaohuyun scrape 2026-07-15  # 抓指定日期"
-    echo "  docker compose run chaohuyun daily        # 执行每日任务"
+    echo "  web         # 启动网页（默认）"
+    echo "  scheduler   # 启动定时抓取"
+    echo "  scrape      # 一次性抓取全部"
+    echo "  scrape 2026-07-15  # 抓指定日期"
+    echo "  daily       # 执行每日任务"
     ;;
 esac
