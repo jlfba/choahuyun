@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 每日自动抓取 - 抓取前一天数据 → 转写 → 完成退出
@@ -81,7 +81,7 @@ def clean_data(date_str):
         return True
 
     df["keep"] = df["录音转写文字"].apply(should_keep)
-    df = df[df["keep"]].drop(columns=["keep"])
+    df = df.loc[df["keep"]].drop(columns=["keep"])
     df = df.reset_index(drop=True)
     df["序号"] = range(1, len(df) + 1)
 
