@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 通话记录展示 - FastAPI 后端
@@ -42,19 +42,27 @@ def get_dates():
 def get_records(date: str = Query("", description="日期筛选")):
     """返回通话记录"""
     if date:
-        excel_path = OUTPUT_DIR / f"通话记录_{date}.xlsx"
-        if not excel_path.exists():
-            # 尝试找带模型名的
-            for f in OUTPUT_DIR.glob(f"通话记录_{date}*.xlsx"):
-                excel_path = f
-                break
+        # 优先用 SenseVoice 文件（清洗后数据）
+        sv_file = OUTPUT_DIR / f"通话记录_{date}_SenseVoice.xlsx"
+        if sv_file.exists():
+            excel_path = sv_file
+        else:
+            excel_path = OUTPUT_DIR / f"通话记录_{date}.xlsx"
+            if not excel_path.exists():
+                for f in OUTPUT_DIR.glob(f"通话记录_{date}*.xlsx"):
+                    excel_path = f
+                    break
     else:
-        # 找最新的
+        # 找最新的，优先用 SenseVoice 文件（清洗后数据）
         files = sorted(OUTPUT_DIR.glob("通话记录_2026-*.xlsx"))
-        files = [f for f in files if "_Whisper" not in f.name and "_FunASR" not in f.name and "_SenseVoice" not in f.name]
-        if not files:
-            return []
-        excel_path = Path(files[-1])
+        sensevoice_files = [f for f in files if "_SenseVoice" in f.name]
+        if sensevoice_files:
+            excel_path = Path(sensevoice_files[-1])
+        else:
+            files = [f for f in files if "_Whisper" not in f.name and "_FunASR" not in f.name and "_SenseVoice" not in f.name]
+            if not files:
+                return []
+            excel_path = Path(files[-1])
 
     if not excel_path.exists():
         return []
@@ -72,14 +80,18 @@ def get_records(date: str = Query("", description="日期筛选")):
         call_time = str(row.get("通话时间", "")).replace(" ", "_").replace(":", "-")
         seq = str(row.get("序号", i+1)).zfill(4)
 
-        # 找音频文件
+        # 找音频文件：用主叫+被叫组合匹配（不依赖序号，清洗后序号重置也不受影响）
         audio_url = ""
-        fname_base = f"{seq}_{caller}_{callee}_{call_time}"
         dt_dir = AUDIO_DIR / date_str
         if dt_dir.exists():
-            audio_file = next(dt_dir.glob(f"{fname_base}.*"), None)
+            audio_file = None
+            for f in dt_dir.glob(f"{seq}_*"):
+                if caller in f.name and callee in f.name:
+                    audio_file = f
+                    break
             if not audio_file:
-                for f in dt_dir.glob(f"{seq}_*"):
+                # 兜底：全目录扫描主叫+被叫组合
+                for f in dt_dir.iterdir():
                     if caller in f.name and callee in f.name:
                         audio_file = f
                         break

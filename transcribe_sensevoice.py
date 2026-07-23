@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 SenseVoice 转写脚本 - 用已下载的音频+已有Excel，只做转写回填
@@ -60,11 +60,12 @@ def transcribe_one(excel_path, output_path, date_override=None):
     df = pd.read_excel(excel_path)
     log(f"Excel: {excel_path.name} ({len(df)} 条)")
 
-    # 检查是否已有转写模型（避免重复转写）
-    if "转写模型" in df.columns and df["转写模型"].notna().any():
-        existing_model = df["转写模型"].dropna().iloc[0] if df["转写模型"].notna().any() else ""
-        if "SenseVoice" in str(existing_model):
-            log("  跳过 - 已有 SenseVoice 转写结果")
+    # 检查是否已有转写结果（避免重复转写）
+    if "录音转写文字" in df.columns and df["录音转写文字"].notna().any():
+        non_empty = df["录音转写文字"].dropna()
+        non_empty = non_empty[non_empty.astype(str).str.strip() != ""]
+        if len(non_empty) > 0:
+            log("  跳过 - 已有转写结果")
             return
 
     # 加载模型（只加载一次，函数外管理）
@@ -116,7 +117,6 @@ def transcribe_one(excel_path, output_path, date_override=None):
 
     # 回填Excel
     df["录音转写文字"] = texts
-    df["转写模型"] = "SenseVoice"
     with pd.ExcelWriter(output_path, engine="openpyxl") as w:
         df.to_excel(w, sheet_name="通话记录", index=False)
 
